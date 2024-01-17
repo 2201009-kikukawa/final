@@ -2,4 +2,4 @@
 クラス　　:SD2A
 氏名　　　:菊川 一輝
 システム名:qittaブックマークシステム
-Url　　　 :http://aso2201009.itigo.jp/phpfinal/login.html
+Url　　　 :http://aso2201009.itigo.jp/src/login.html
