@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索画面</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <a href="#" class="profile-link" v-on:click="goToProfile">プロフィール</a>
+        <h1>検索画面</h1>
+        <div class="continer">
+            <p>
+                <input type="text" v-model="keyword">
+                <button v-on:click="getAnswer">検索</button>
+            </p>
+
+            <div class="flex1">
+                <div class="pagination">
+                    <span>{{ currentPage }} / {{ totalPages }}</span>
+                    <button v-on:click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">次のページへ</button>
+                    <button v-on:click="changePage(currentPage - 1)" :disabled="currentPage === 1">前のページへ</button>
+                </div>
+                <div class="pagebutton">
+                    <button v-on:click="updatePerPage(20)">20 items</button>
+                    <button v-on:click="updatePerPage(50)">50 items</button>
+                    <button v-on:click="updatePerPage(100)">100 items</button>
+                </div>
+            </div>
+
+            <p>
+                {{ message }}
+            </p>
+            <ul>
+                <li v-for="(item, index) in items" :key="index">
+                    <hr>
+                    <a v-bind:href="item.url" target="_blank">{{ item.title }}</a>
+                    <button v-on:click="openModal(item)">保存</button>
+                </li>
+            </ul>
+            <button v-on:click="goToBookmark" class="goToBookmark">Bookmarkページに行く</button>
+        </div>
+        <div class="modal" v-if="selectedItem">
+            <h2>{{ selectedItem.title }}</h2>
+            <p>記事のリンク: <a v-bind:href="selectedItem.url" target="_blank" class="link">{{ selectedItem.url }}</a></p>
+            <textarea v-model="comment" placeholder="コメントを記入してください"></textarea>
+            <label for="tagSelect">タグ選択:</label>
+            <select id="tagSelect" v-model="selectedTag">
+                <option v-for="tag in tags" :key="tag.tag_id" :value="tag.tag_id">{{ tag.tag_name }}</option>
+            </select>
+            <button v-on:click="linkSave" class="linkSave">保存</button>
+            <button v-on:click="closeModal" class="closeModal">閉じる</button>
+        </div>
+        <div class="modal-background" v-if="selectedItem" v-on:click="closeModal"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

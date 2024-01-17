@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="css/profile.css" />
+</head>
+<body>
+    <div class="container">
+    <div id="profile-app">
+        <div class="profile-container">
+            <h1>Welcome, {{ userName }}!</h1>
+            <p>Email: {{ userEmail }}</p>
+        </div>
+        <div class="tagarea">
+            <div class="tagtext">現在登録されているタグ</div>
+            <div v-if="tagscount > 0">
+                <ul>
+                    <li v-for="tag in tags" :key="tag.tag_id" class="tags">
+                        <div class="tagname">#{{ tag.tag_name }}</div>
+                        <div class="tagcount">({{ tag.tag_count }})</div>
+                    </li>
+                </ul>
+            </div>
+            <div v-else>タグが登録されていません。</div>
+            <button v-on:click="openModal">タグを追加する</button>
+            <button @click="goBack">前のページに戻る</button>
+            <div class="modal" v-if="selectedtag">
+                <h2 class = "tagtitle">タグの新規作成</h2>
+                <input type="text" class="tagname" placeholder="作成するタグの名前を入力" v-model="tagname">
+                <button v-on:click="tagSave">保存</button>
+                <button v-on:click="closeModal">閉じる</button>
+            </div>
+            <div class="modal-background" v-if="selectedtag" v-on:click="closeModal"></div>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

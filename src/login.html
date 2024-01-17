@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet/less" type="text/css" href="css/style.less" />
+    <style>
+        #register {
+            appearance: none;
+            outline: 0;
+            background-color: white;
+            border: 0;
+            padding: 5px 15px;
+            color: #53e3a6;
+            border-radius: 3px;
+            width: 150px;
+            cursor: pointer;
+            font-size: 12px;
+            transition-duration: 0.25s;
+            z-index: 2;
+            position: relative;
+            margin-top: -10px;
+        }
+    </style>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <div class="container">
+                <h1>{{ text1 }}</h1>
+                
+                <form class="form" @submit.prevent="submitForm">
+                    <input type="text" v-model="email" name="text" placeholder="e-mail">
+                    <div v-if="flag">
+                        <input type="text" v-model="username" name="username" placeholder="username">
+                    </div>
+                    <input type="password" v-model="password" name="pass" placeholder="password">
+                    <button type="submit" id="login-button">{{ text3 }}</button>
+                </form>
+                <button type="submit" id="register" @click="toggleForm">{{ text4 }}</button>
+            </div>
+            
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

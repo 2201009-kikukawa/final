@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブックマーク一覧</title>
+    <link rel="stylesheet" type="text/css" href="css/bookmark.css" />
+</head>
+<body>
+    <div class="container">
+    <div id="bookmark-app">
+        <h1>ブックマーク一覧</h1>
+        <label for="tagFilter">タグで絞り込み：</label>
+        <select id="tagFilter" v-model="selectedTag" v-on:change="filterBookmarks">
+            <option value="">全てのタグ</option>
+            <option v-for="tag in tags" :key="tag.tag_id" :value="tag.tag_id">{{ tag.tag_name }}</option>
+        </select>
+        
+        <ul v-if="bookmarkscount > 0">
+            <li v-for="bookmark in bookmarks" :key="bookmark.bookmark_id">
+                <h2 class="title">{{ bookmark.title }}</h2>
+                <div><a :href="bookmark.url" target="_blank">{{ bookmark.url }}</a></div>
+                <div>コメント:{{ bookmark.comment }}</div>
+                <div>ジャンル:{{ getTagName(bookmark.tag_id) }}</div>
+                <button @click="commentupdate(bookmark)">編集</button>
+                <button @click="bookmarkdelete(bookmark.bookmark_id)">削除</button>
+                <hr>
+            </li>
+        </ul>
+        <div v-else>ブックマークがありません。</div>
+
+        <div class="modal" v-show="showModal">
+            <h2>コメント編集</h2>
+            <div>{{ editingBookmark.title }}</div>
+            <div><a :href="editingBookmark.url" target="_blank">{{ editingBookmark.url }}</a></div>
+            <textarea v-model="editedComment" placeholder="新しいコメントを入力してください"></textarea>
+            <button @click="saveComment" class="save">保存</button>
+            <button @click="closeModal" class="close">閉じる</button>
+        </div>
+        <div class="modal-background" v-if="showModal" v-on:click="closeModal"></div>
+        <button @click="goBack" class="goBack">前のページに戻る</button><br>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+    <script src="js/bookmark.js"></script>
+</body>
+</html>
