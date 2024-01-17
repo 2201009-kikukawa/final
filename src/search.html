@@ -19,13 +19,13 @@
             <div class="flex1">
                 <div class="pagination">
                     <span>{{ currentPage }} / {{ totalPages }}</span>
-                    <button v-on:click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">次のページへ</button>
-                    <button v-on:click="changePage(currentPage - 1)" :disabled="currentPage === 1">前のページへ</button>
+                    <button class="green" v-on:click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">次のページへ</button>
+                    <button class="green" v-on:click="changePage(currentPage - 1)" :disabled="currentPage === 1">前のページへ</button>
                 </div>
                 <div class="pagebutton">
-                    <button v-on:click="updatePerPage(20)">20 items</button>
-                    <button v-on:click="updatePerPage(50)">50 items</button>
-                    <button v-on:click="updatePerPage(100)">100 items</button>
+                    <button v-on:click="updatePerPage(20)" class="green">20 items</button>
+                    <button v-on:click="updatePerPage(50)" class="green">50 items</button>
+                    <button v-on:click="updatePerPage(100)"class="green">100 items</button>
                 </div>
             </div>
 
